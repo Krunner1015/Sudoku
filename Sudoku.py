@@ -1,6 +1,8 @@
 import pygame
 BG_COLOR = (173, 216, 230)
 screen = pygame.display.set_mode((405, 504))
+pygame.display.set_caption("Sudoku")
+
 
 def drawLines():
         for i in range(0, 4):
@@ -56,8 +58,7 @@ def opening_Screen():
 try:
     pygame.init()
     screen = pygame.display.set_mode((405, 504))
-    running = True
-    while running:
+    while True:
         screen.fill("light blue")
         drawLines()
         opening_Screen()
