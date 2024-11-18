@@ -14,7 +14,7 @@ def drawLines():
             for i in range(0, 9):
                 pygame.draw.line(screen, "black", (i * 80, 0), (i * 80, 720), 2)
 
-def difficulty_button():
+def opening_Screen():
             background_image = pygame.image.load("background_Soduko.jpg")
             screen.blit(background_image, background_image.get_rect(center =(500, 350)))
             welcome = "Welcome to Sudoku"
