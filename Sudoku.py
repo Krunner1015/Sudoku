@@ -1,7 +1,12 @@
-import pygame
+import pygame, sys
+
 BG_COLOR = (173, 216, 230)
+
+pygame.init()
 screen = pygame.display.set_mode((405, 504))
 pygame.display.set_caption("Sudoku")
+
+game_over = False
 
 
 def drawLines():
@@ -54,15 +59,33 @@ def opening_Screen():
             end_rect = hard_surf.get_rect(center=(325, 377))
             screen.blit(hard_surf, end_rect)
 
+def difficulty_selection(click_x, click_y):
+    easy = ()
+    medium = ()
+    hard = ()
 
-try:
-    pygame.init()
-    screen = pygame.display.set_mode((405, 504))
-    while True:
-        screen.fill("light blue")
-        drawLines()
-        opening_Screen()
-        pygame.display.flip()
-finally:
-    pygame.quit()
+    if easy[0] < click_x < easy[2] and easy[1] < click_y < easy[3]:
+        return "easy"
 
+    if medium[0] < click_x < medium[2] and medium[1] < click_y < medium[3]:
+        return "medium"
+
+    if hard[0] < click_x < hard[2] and hard[1] < click_y < hard[3]:
+        return "hard"
+
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
+            x, y = event.pos()
+            difficulty = difficulty_selection()
+
+            screen.fill("light blue")
+            drawLines()
+            opening_Screen()
+            pygame.display.flip()
