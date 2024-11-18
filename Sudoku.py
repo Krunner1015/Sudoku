@@ -58,6 +58,7 @@ try:
     screen = pygame.display.set_mode((720, 720))
     running = True
     while running:
+        screen.fill("light blue")
         drawLines()
         opening_Screen()
         pygame.display.flip()
