@@ -1,8 +1,5 @@
 import pygame
-
-
 BG_COLOR = (173, 216, 230)
-pygame.init()
 screen = pygame.display.set_mode((720, 720))
 
 def drawLines():
@@ -55,18 +52,15 @@ def opening_Screen():
             end_rect = hard_surf.get_rect(center=(643, 515))
             screen.blit(hard_surf, end_rect)
 
-screen.fill(BG_COLOR)
-drawLines()
-difficulty_button()
 
-
-while True:
+try:
     pygame.init()
-    screen.fill(BG_COLOR)
-    drawLines()
-    difficulty_button()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-
+    screen = pygame.display.set_mode((720, 720))
+    running = True
+    while running:
+        drawLines()
+        opening_Screen()
+        pygame.display.flip()
+finally:
+    pygame.quit()
 
