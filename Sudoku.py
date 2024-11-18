@@ -19,6 +19,7 @@ def difficulty_button():
         easy_text = "Easy"
         medium_text = "Medium"
         hard_text = "Hard"
+        #Easy Button
         pygame.draw.line(screen, "orange", (80, 480), (240, 480), 3)
         pygame.draw.line(screen, "orange", (80, 480), (80, 560), 3)
         pygame.draw.line(screen, "orange", (80, 560), (240, 560), 3)
@@ -27,6 +28,8 @@ def difficulty_button():
         end_rect = easy_surf.get_rect(center=(159, 515))
         screen.blit(easy_surf, end_rect)
 
+        #Medium Button
+
         pygame.draw.line(screen, "orange", (320, 480), (480, 480), 3)
         pygame.draw.line(screen, "orange", (320, 480), (320, 560), 3)
         pygame.draw.line(screen, "orange", (320, 560), (480, 560), 3)
@@ -34,6 +37,8 @@ def difficulty_button():
         medium_surf = difficulty.render(medium_text, 0, "white")
         end_rect = medium_surf.get_rect(center=(401, 515))
         screen.blit(medium_surf, end_rect)
+
+        #Hard Button
 
         pygame.draw.line(screen, "orange", (560, 480), (720, 480), 3)
         pygame.draw.line(screen, "orange", (560, 480), (560, 560), 3)
