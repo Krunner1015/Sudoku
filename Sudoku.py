@@ -1,5 +1,7 @@
 import pygame, sys
 from sudoku_generator import *
+from cell import *
+from board import *
 
 BG_COLOR = (173, 216, 230)
 
@@ -149,16 +151,23 @@ while True:
             sys.exit()
 
         if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
-            x, y = event.pos()
+            x, y = pygame.mouse.get_pos()
             difficulty = difficulty_selection(x, y)
             if difficulty == "easy":
                 board, board_sol = generate_sudoku(9, 30)
+                screen.fill("light blue")
+                drawLines()
+                in_game()
+                pygame.display.flip()
             elif difficulty == "medium":
                 board, board_sol = generate_sudoku(9, 40)
+                screen.fill("light blue")
+                drawLines()
+                in_game()
+                pygame.display.flip()
             elif difficulty == "hard":
                 board, board_sol = generate_sudoku(9, 50)
-
-            screen.fill("light blue")
-            drawLines()
-            in_game()
-            pygame.display.flip()
+                screen.fill("light blue")
+                drawLines()
+                in_game()
+                pygame.display.flip()
