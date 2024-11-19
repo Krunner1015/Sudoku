@@ -18,3 +18,4 @@ class Cell:
             for row in range(9):
                 for col in range(9):
                     chip_value.get_rect(center = (col * 80 + 40, row * 80 + 40))
+##flag run = - 
