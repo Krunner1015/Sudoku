@@ -32,7 +32,7 @@ class SudokuGenerator:
             [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]
         ]
-        self.box_length = row_length ** 0.5
+        self.box_length = int(row_length ** 0.5)
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -105,10 +105,12 @@ class SudokuGenerator:
     '''
 
     def valid_in_box(self, row_start, col_start, num):
-        for i in range(row_start, row_start+3):
-            for j in range(col_start, col_start+3):
-                if num == self.board[i][j]:
-                    return False
+        # for i in range(row_start, row_start + 3):
+        #     for j in range(col_start, col_start + 3):
+        #         if num == self.board[i][j]:
+        #             return False
+        if num == self.board[row_start][col_start]:
+            return False
         return True
 
     '''
@@ -123,6 +125,8 @@ class SudokuGenerator:
     '''
 
     def is_valid(self, row, col, num):
+        row = int(row)
+        col = int(col)
         if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row, col, num):
             return True
         return False
@@ -139,6 +143,8 @@ class SudokuGenerator:
     '''
 
     def fill_box(self, row_start, col_start):
+        row_start = int(row_start)
+        col_start = int(col_start)
         for i in range(row_start, row_start+3):
             for j in range(col_start, col_start+3):
                 num = random.randrange(1, 10)
