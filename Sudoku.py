@@ -21,7 +21,7 @@ def drawLines():
                 pygame.draw.line(screen, "black", (i * 45, 0), (i * 45, 405), 2)
 
 def opening_Screen():
-            background_image = pygame.image.load("background_Soduko.jpg")
+            background_image = pygame.image.load("background_Sudoku.jpg")
             screen.blit(background_image, (0,0), (700, 100, 405, 504))
             welcome = "Welcome to Sudoku"
             intro = pygame.font.Font(None, 60)
@@ -93,7 +93,7 @@ def in_game():
 
 def victory_screen():
     button_font = pygame.font.Font(None, 25)
-    background_image = pygame.image.load("background_Soduko.jpg")
+    background_image = pygame.image.load("background_Sudoku.jpg")
     screen.blit(background_image, background_image.get_rect(center=(202.5, 252)))
     victory_text = "Game Won!"
     victory_message = pygame.font.Font(None, 60)
@@ -111,7 +111,7 @@ def victory_screen():
 
 def loss_screen():
     button_font = pygame.font.Font(None, 25)
-    background_image = pygame.image.load("background_Soduko.jpg")
+    background_image = pygame.image.load("background_Sudoku.jpg")
     screen.blit(background_image, background_image.get_rect(center=(202.5, 252)))
     victory_text = "Game Over :("
     victory_message = pygame.font.Font(None, 60)
