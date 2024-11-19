@@ -83,6 +83,43 @@ def in_game():
     end_rect = button3_surf.get_rect(center=(325, 479))
     screen.blit(button3_surf, end_rect)
 
+def victory_screen():
+    button_font = pygame.font.Font(None, 25)
+    background_image = pygame.image.load("background_Soduko.jpg")
+    screen.blit(background_image, background_image.get_rect(center=(202.5, 252)))
+    victory_text = "Game Won!"
+    victory_message = pygame.font.Font(None, 60)
+    victory_surf = victory_message.render(victory_text, 0, "black")
+    victory_rect = victory_surf.get_rect(center=(202.5, 100))
+    screen.blit(victory_surf, victory_rect)
+    pygame.draw.line(screen, "orange", (280, 454), (370, 454), 3)
+    pygame.draw.line(screen, "orange", (280, 454), (280, 504), 3)
+    pygame.draw.line(screen, "orange", (280, 504), (370, 504), 3)
+    pygame.draw.line(screen, "orange", (370, 454), (370, 504), 3)
+    button3 = "Exit"
+    button3_surf = button_font.render(button3, 0, "white")
+    end_rect = button3_surf.get_rect(center=(202.5, 300))
+    screen.blit(button3_surf, end_rect)
+
+def loss_screen():
+    button_font = pygame.font.Font(None, 25)
+    background_image = pygame.image.load("background_Soduko.jpg")
+    screen.blit(background_image, background_image.get_rect(center=(202.5, 252)))
+    victory_text = "Game Over :("
+    victory_message = pygame.font.Font(None, 60)
+    victory_surf = victory_message.render(victory_text, 0, "black")
+    victory_rect = victory_surf.get_rect(center=(202.5, 100))
+    screen.blit(victory_surf, victory_rect)
+    pygame.draw.line(screen, "orange", (280, 454), (370, 454), 3)
+    pygame.draw.line(screen, "orange", (280, 454), (280, 504), 3)
+    pygame.draw.line(screen, "orange", (280, 504), (370, 504), 3)
+    pygame.draw.line(screen, "orange", (370, 454), (370, 504), 3)
+    button3 = "Restart"
+    button3_surf = button_font.render(button3, 0, "white")
+    end_rect = button3_surf.get_rect(center=(202.5, 300))
+    screen.blit(button3_surf, end_rect)
+
+
 try:
     pygame.init()
     screen = pygame.display.set_mode((405, 504))
@@ -115,7 +152,7 @@ try:
                 pygame.quit()
             elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(280, 370)) and (event.pos[1] in range(454, 504)):
                 pygame.quit()
-                
+
         screen.fill("light blue")
         drawLines()
         in_game()
