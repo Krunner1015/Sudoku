@@ -53,6 +53,35 @@ def opening_Screen():
             end_rect = hard_surf.get_rect(center=(325, 377))
             screen.blit(hard_surf, end_rect)
 
+def in_game():
+    button_font = pygame.font.Font(None, 25)
+
+    pygame.draw.line(screen, "orange", (30, 454), (120, 454), 3)
+    pygame.draw.line(screen, "orange", (30, 454), (30, 504), 3)
+    pygame.draw.line(screen, "orange", (30, 504), (120, 504), 3)
+    pygame.draw.line(screen, "orange", (120, 454), (120, 504), 3)
+    button1 = "Reset"
+    button1_surf = button_font.render(button1, 0, "white")
+    end_rect = button1_surf.get_rect(center=(75, 479))
+    screen.blit(button1_surf, end_rect)
+
+    pygame.draw.line(screen, "orange", (155, 454), (245, 454), 3)
+    pygame.draw.line(screen, "orange", (155, 454), (155, 504), 3)
+    pygame.draw.line(screen, "orange", (155, 504), (245, 504), 3)
+    pygame.draw.line(screen, "orange", (245, 454), (245, 504), 3)
+    button2 = "Restart"
+    button2_surf = button_font.render(button2, 0, "white")
+    end_rect = button2_surf.get_rect(center=(200, 479))
+    screen.blit(button2_surf, end_rect)
+
+    pygame.draw.line(screen, "orange", (280, 454), (370, 454), 3)
+    pygame.draw.line(screen, "orange", (280, 454), (280, 504), 3)
+    pygame.draw.line(screen, "orange", (280, 504), (370, 504), 3)
+    pygame.draw.line(screen, "orange", (370, 454), (370, 504), 3)
+    button3 = "Exit"
+    button3_surf = button_font.render(button3, 0, "white")
+    end_rect = button3_surf.get_rect(center=(325, 479))
+    screen.blit(button3_surf, end_rect)
 
 try:
     pygame.init()
@@ -66,11 +95,11 @@ try:
             elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(30, 121)) and (event.pos[1] in range(352, 403)):
                 clicked = True
                 break
-            
+
             elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(155, 245)) and (event.pos[1] in range(352, 403)):
                 clicked = True
                 break
-                
+
             elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(280, 370)) and (event.pos[1] in range(352, 403)):
                 clicked = True
                 break
@@ -84,8 +113,12 @@ try:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+            elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(280, 370)) and (event.pos[1] in range(454, 504)):
+                pygame.quit()
+                
         screen.fill("light blue")
         drawLines()
+        in_game()
         pygame.display.flip()
 finally:
     pygame.quit()
