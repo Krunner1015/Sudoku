@@ -151,10 +151,14 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
             x, y = event.pos()
             difficulty = difficulty_selection(x, y)
+            if difficulty == "easy":
+                board, board_sol = generate_sudoku(9, 30)
+            elif difficulty == "medium":
+                board, board_sol = generate_sudoku(9, 40)
+            elif difficulty == "hard":
+                board, board_sol = generate_sudoku(9, 50)
+
             screen.fill("light blue")
             drawLines()
             in_game()
-
-            #need to add the part here that puts the correct amount of numbers on the screen
-
             pygame.display.flip()
