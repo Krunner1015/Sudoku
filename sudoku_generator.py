@@ -105,12 +105,10 @@ class SudokuGenerator:
     '''
 
     def valid_in_box(self, row_start, col_start, num):
-        # for i in range(row_start, row_start + 3):
-        #     for j in range(col_start, col_start + 3):
-        #         if num == self.board[i][j]:
-        #             return False
-        if num == self.board[row_start][col_start]:
-            return False
+        for i in range(row_start, row_start + 3):
+            for j in range(col_start, col_start + 3):
+                if num == self.board[i][j]:
+                    return False
         return True
 
     '''
@@ -127,7 +125,7 @@ class SudokuGenerator:
     def is_valid(self, row, col, num):
         row = int(row)
         col = int(col)
-        if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row, col, num):
+        if self.valid_in_row(row, num) and self.valid_in_col(col, num):
             return True
         return False
 
@@ -148,7 +146,7 @@ class SudokuGenerator:
         for i in range(row_start, row_start+3):
             for j in range(col_start, col_start+3):
                 num = random.randrange(1, 10)
-                if self.is_valid(i, j, num):
+                if self.is_valid(i, j, num) and self.valid_in_box(row_start, col_start, num):
                     self.board[i][j] = num
 
     '''
