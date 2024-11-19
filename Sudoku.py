@@ -1,5 +1,6 @@
 import pygame
-BG_COLOR = (173, 216, 230)
+from pygame import MOUSEBUTTONDOWN
+
 screen = pygame.display.set_mode((405, 504))
 
 def drawLines():
@@ -56,11 +57,35 @@ def opening_Screen():
 try:
     pygame.init()
     screen = pygame.display.set_mode((405, 504))
-    running = True
-    while running:
+    num_spaces = -1
+    while True:
+        clicked = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(30, 121)) and (event.pos[1] in range(352, 403)):
+                clicked = True
+                break
+            
+            elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(155, 245)) and (event.pos[1] in range(352, 403)):
+                clicked = True
+                break
+                
+            elif (event.type == pygame.MOUSEBUTTONDOWN) and (event.pos[0] in range(280, 370)) and (event.pos[1] in range(352, 403)):
+                clicked = True
+                break
+        if clicked:
+            break
+
+        opening_Screen()
+        pygame.display.flip()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
         screen.fill("light blue")
         drawLines()
-        opening_Screen()
         pygame.display.flip()
 finally:
     pygame.quit()
