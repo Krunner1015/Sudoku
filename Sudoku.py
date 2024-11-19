@@ -154,4 +154,7 @@ while True:
             screen.fill("light blue")
             drawLines()
             in_game()
+
+            #need to add the part here that puts the correct amount of numbers on the screen
+
             pygame.display.flip()
