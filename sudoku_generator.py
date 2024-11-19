@@ -225,12 +225,12 @@ class SudokuGenerator:
     '''
 
     def remove_cells(self):
-        if difficulty == "easy":    # gotta figure this part out with number of squares to clear out
-            self.removed_cells = 30
-        elif difficulty == "medium":
-            self.removed_cells = 40
-        elif difficulty == "hard":
-            self.removed_cells = 50
+        # if difficulty == "easy":    # gotta figure this part out with number of squares to clear out
+        #     self.removed_cells = 30
+        # elif difficulty == "medium":
+        #     self.removed_cells = 40
+        # elif difficulty == "hard":
+        #     self.removed_cells = 50
 
         while self.removed_cells > 0:
             cell_row = random.randrange(0, 9)
@@ -260,7 +260,8 @@ Return: list[list] (a 2D Python list to represent the board)
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
-    board = sudoku.get_board()
+    board_sol = sudoku.get_board()
     sudoku.remove_cells()
     board = sudoku.get_board()
-    return board
+    return board, board_sol
+
