@@ -8,17 +8,18 @@ game_over = False
 
 
 pygame.init()
+pygame.key.set_repeat(1000,0)
 screen = pygame.display.set_mode((405, 504))
 pygame.display.set_caption("Sudoku")
 
-def drawLines():
-        for i in range(0, 4):
-            pygame.draw.line(screen, "black", (0, i * 135), (405, i * 135), 5)
-            pygame.draw.line(screen, "black", (i * 135, 0), (i * 135, 405), 5)
-            for i in range(0, 9):
-                pygame.draw.line(screen, "black", (0, i * 45), (405, i * 45), 2)
-            for i in range(0, 9):
-                pygame.draw.line(screen, "black", (i * 45, 0), (i * 45, 405), 2)
+# def drawLines():
+#         for i in range(0, 4):
+#             pygame.draw.line(screen, "black", (0, i * 135), (405, i * 135), 5)
+#             pygame.draw.line(screen, "black", (i * 135, 0), (i * 135, 405), 5)
+#             for i in range(0, 9):
+#                 pygame.draw.line(screen, "black", (0, i * 45), (405, i * 45), 2)
+#             for i in range(0, 9):
+#                 pygame.draw.line(screen, "black", (i * 45, 0), (i * 45, 405), 2)
 
 def opening_Screen():
             background_image = pygame.image.load("background_Sudoku.jpg")
@@ -91,6 +92,45 @@ def in_game():
     end_rect = button3_surf.get_rect(center=(325, 479))
     screen.blit(button3_surf, end_rect)
 
+    board_display = Board(405, 405, screen, difficulty)
+    row = 9
+    col = 9
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                (x, y) = event.pos
+                row = y // 45
+                col = x // 45
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    row -= 1
+                if event.key == pygame.K_DOWN:
+                    row += 1
+                if event.key == pygame.K_RIGHT:
+                    col += 1
+                if event.key == pygame.K_LEFT:
+                    col -= 1
+        screen.fill("light blue")
+        board_display.draw()
+
+        # Code for select function
+
+        if row > 8:
+            row = 8
+        if col > 8:
+            col = 8
+        if row < 0:
+            row = 0
+        if col < 0:
+            col = 0
+
+        board_display.select(row, col)
+        pygame.display.flip()
+
 def victory_screen():
     button_font = pygame.font.Font(None, 25)
     background_image = pygame.image.load("background_Sudoku.jpg")
@@ -156,19 +196,10 @@ while True:
             difficulty = difficulty_selection(x, y)
             if difficulty == "easy":
                 board, board_sol = generate_sudoku(9, 30)
-                screen.fill("light blue")
-                drawLines()
                 in_game()
-                pygame.display.flip()
             elif difficulty == "medium":
                 board, board_sol = generate_sudoku(9, 40)
-                screen.fill("light blue")
-                drawLines()
                 in_game()
-                pygame.display.flip()
             elif difficulty == "hard":
                 board, board_sol = generate_sudoku(9, 50)
-                screen.fill("light blue")
-                drawLines()
                 in_game()
-                pygame.display.flip()

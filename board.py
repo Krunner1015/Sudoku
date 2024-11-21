@@ -23,10 +23,10 @@ class Board:
     def select(self, row, col):
         # Marks the cell at (row, col) in the board as the current selected cell.
         # Once a cell has been selected, the user can edit its value or sketched value.
-        pygame.draw.rect(screen, "red", pygame.Rect(col*self.width/9, row*self.height/9, 2, 47))
-        pygame.draw.rect(screen, "red", pygame.Rect(col*self.width/9, row*self.height/9, 47,2))
-        pygame.draw.rect(screen, "red", pygame.Rect(self.width/9+col*self.width/9, row*self.height/9, 2, 47))
-        pygame.draw.rect(screen, "red", pygame.Rect(col*self.width/9, self.height/9+row*self.height/9, 47,2))
+        pygame.draw.rect(self.screen, "red", pygame.Rect(col*self.width/9, row*self.height/9, 2, 47))
+        pygame.draw.rect(self.screen, "red", pygame.Rect(col*self.width/9, row*self.height/9, 47,2))
+        pygame.draw.rect(self.screen, "red", pygame.Rect(self.width/9+col*self.width/9, row*self.height/9, 2, 47))
+        pygame.draw.rect(self.screen, "red", pygame.Rect(col*self.width/9, self.height/9+row*self.height/9, 47,2))
 
 
         
@@ -73,53 +73,3 @@ class Board:
     def check_board(self):
         # Check whether the Sudoku board is solved correctly.
         pass
-
-
-pygame.init()
-pygame.key.set_repeat(1000,0) 
-screen = pygame.display.set_mode((405, 504))
-board = Board(405,405,screen,"easy")
-row = 9
-col = 9
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            (x,y) = event.pos
-            row = y//45
-            col = x//45
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                row-=1
-                print("Up")
-                print(row)
-            if event.key == pygame.K_DOWN:
-                row+=1
-                print("Down")
-                print(row)
-            if event.key == pygame.K_RIGHT:
-                col +=1
-                print("Right")
-                print(col)
-            if event.key == pygame.K_LEFT:
-                col -=1
-                print("Left")
-                print(col)
-    screen.fill("light blue")
-    board.draw()
-
-    # Code for select function
-
-    if row > 8:
-        row = 8
-    if col > 8:
-        col = 8
-    if row < 0:
-        row = 0
-    if col < 0:
-        col =0
-
-    board.select(row,col)
-    pygame.display.flip()
