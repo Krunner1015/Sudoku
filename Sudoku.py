@@ -105,6 +105,7 @@ def in_game():
                 (x, y) = event.pos
                 row = y // 45
                 col = x // 45
+                #add code here for reset, restart, and exit buttons
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     row -= 1
