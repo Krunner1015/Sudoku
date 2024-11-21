@@ -105,7 +105,14 @@ def in_game():
                 (x, y) = event.pos
                 row = y // 45
                 col = x // 45
-                #add code here for reset, restart, and exit buttons
+                # add code here for reset, restart, and exit buttons
+                # if easy[0] < x < easy[2] and easy[1] < y < easy[3]:
+                #     return "easy"
+                # if medium[0] < x < medium[2] and medium[1] < y < medium[3]:
+                #     return "medium"
+                # if hard[0] < x < hard[2] and hard[1] < y < hard[3]:
+                #     return "hard"
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     row -= 1
