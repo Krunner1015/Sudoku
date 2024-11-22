@@ -11,6 +11,7 @@ pygame.init()
 pygame.key.set_repeat(1000,0)
 screen = pygame.display.set_mode((405, 504))
 pygame.display.set_caption("Sudoku")
+font = pygame.font.SysFont("Arial", 30)
 
 def opening_Screen():
     background_image = pygame.image.load("background_Sudoku.jpg")
@@ -67,7 +68,7 @@ def difficulty_selection(click_x, click_y):
     if hard[0] < click_x < hard[2] and hard[1] < click_y < hard[3]:
         return "hard"
 
-def in_game_screen():
+def in_game_buttons():
     button_font = pygame.font.Font(None, 25)
 
     pygame.draw.line(screen, "orange", (30, 429), (120, 429), 3)
@@ -133,9 +134,18 @@ def loss_screen():
     end_rect = button3_surf.get_rect(center=(202.5, 300))
     screen.blit(button3_surf, end_rect)
 
+def draw_board():
+    for row in range(9):
+        for col in range(9):
+            if board[row][col] == 0:
+                return
+            else:
+                cell_surf = font.render(str(board[row][col]), True, (0, 0, 0))
+                cell_rect = cell_surf.get_rect(topleft=(col * 45 + 45 / 2, row * 45 + 45 / 2))
+                screen.blit(cell_surf, cell_rect)
+
 def in_game():
     board_display = Board(405, 405, screen, difficulty)
-
     row = 9
     col = 9
 
@@ -173,10 +183,6 @@ def in_game():
                 if event.key == pygame.K_LEFT:
                     col -= 1
 
-        screen.fill("light blue")
-        board_display.draw()
-        in_game_screen()
-
         # Code for select function
 
         if row > 8:
@@ -188,6 +194,10 @@ def in_game():
         if col < 0:
             col = 0
 
+        screen.fill("light blue")
+        board_display.draw()
+        in_game_buttons()
+        draw_board()
         board_display.select(row, col)
         pygame.display.flip()
 

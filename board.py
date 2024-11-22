@@ -20,15 +20,15 @@ class Board:
                     pygame.draw.line(self.screen, "black", (i * 45, 0), (i * 45, 405), 2)
 
         # Draws every cell on this board.
-        font = pygame.font.SysFont("Arial", 40)
-        for row in range(9):
-            for col in range(9):
-                if board[row][col] == 0:
-                    print(f"{row}, {col} is 0")
-                else:
-                    cell_surf = font.render(str(board[row][col]), True, (0, 0, 0))
-                    cell_rect = cell_surf.get_rect(topleft=(col*45+45/2, row*45+45/2))
-                    screen.blit(cell_surf, cell_rect)
+        # font = pygame.font.SysFont("Arial", 40)
+        # for row in range(9):
+        #     for col in range(9):
+        #         if board[row][col] == 0:
+        #             print(f"{row}, {col} is 0")
+        #         else:
+        #             cell_surf = font.render(str(board[row][col]), True, (0, 0, 0))
+        #             cell_rect = cell_surf.get_rect(topleft=(col*45+45/2, row*45+45/2))
+        #             screen.blit(cell_surf, cell_rect)
 
 
     def select(self, row, col):
