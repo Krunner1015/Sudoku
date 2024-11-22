@@ -11,7 +11,6 @@ class Board:
 
     def draw(self):
         # Draws an outline of the Sudoku grid, with bold lines to delineate the 3x3 boxes.
-        # Draws every cell on this board.
         for i in range(0, 4):
                 pygame.draw.line(self.screen, "black", (0, i * 135), (405, i * 135), 4)
                 pygame.draw.line(self.screen, "black", (i * 135, 0), (i * 135, 405), 4)
@@ -19,6 +18,18 @@ class Board:
                     pygame.draw.line(self.screen, "black", (0, i * 45), (405, i * 45), 2)
                 for i in range(0, 9):
                     pygame.draw.line(self.screen, "black", (i * 45, 0), (i * 45, 405), 2)
+
+        # Draws every cell on this board.
+        font = pygame.font.SysFont("Arial", 40)
+        for row in range(9):
+            for col in range(9):
+                if board[row][col] == 0:
+                    print(f"{row}, {col} is 0")
+                else:
+                    cell_surf = font.render(str(board[row][col]), True, (0, 0, 0))
+                    cell_rect = cell_surf.get_rect(topleft=(col*45+45/2, row*45+45/2))
+                    screen.blit(cell_surf, cell_rect)
+
 
     def select(self, row, col):
         # Marks the cell at (row, col) in the board as the current selected cell.

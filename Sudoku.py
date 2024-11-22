@@ -135,7 +135,7 @@ def loss_screen():
 
 def in_game():
     board_display = Board(405, 405, screen, difficulty)
-    # add code here for displaying the board on the screen
+
     row = 9
     col = 9
 
