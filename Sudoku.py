@@ -148,17 +148,17 @@ def in_game():
                 (x, y) = event.pos
                 row = y // 45
                 col = x // 45
-                if 30 < x < 120 and 454 < y < 504:
+                if 30 < x < 120 and 429 < y < 479:
                     #code to reset board
                     print("reset")
-                if 155 < x < 245 and 454 < y < 504:
+                if 155 < x < 245 and 429 < y < 479:
                     pygame.init()
                     pygame.key.set_repeat(1000, 0)
                     pygame.display.set_caption("Sudoku")
                     opening_Screen()
                     pygame.display.flip()
                     return
-                if 280 < x < 370 and 454 < y < 504:
+                if 280 < x < 370 and 429 < y < 479:
                     print("Game was quit")
                     pygame.quit()
                     sys.exit()
