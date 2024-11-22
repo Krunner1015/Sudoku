@@ -1,4 +1,4 @@
-import math, random
+import math, random, copy
 
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
@@ -125,7 +125,7 @@ class SudokuGenerator:
     def is_valid(self, row, col, num):
         row = int(row)
         col = int(col)
-        if self.valid_in_row(row, num) and self.valid_in_col(col, num):
+        if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(row - row % 3, col - col % 3, num):
             return True
         return False
 
@@ -141,13 +141,14 @@ class SudokuGenerator:
     '''
 
     def fill_box(self, row_start, col_start):
-        row_start = int(row_start)
-        col_start = int(col_start)
+        nums = list(range(1, 10))
+        random.shuffle(nums)
         for i in range(row_start, row_start+3):
             for j in range(col_start, col_start+3):
-                num = random.randrange(1, 10)
-                if self.is_valid(i, j, num) and self.valid_in_box(row_start, col_start, num):
-                    self.board[i][j] = num
+                for num in nums:
+                    if self.is_valid(i, j, num):
+                        self.board[i][j] = num
+                        break
 
     '''
     Fills the three boxes along the main diagonal of the board
@@ -229,13 +230,6 @@ class SudokuGenerator:
     '''
 
     def remove_cells(self):
-        # if difficulty == "easy":    # gotta figure this part out with number of squares to clear out
-        #     self.removed_cells = 30
-        # elif difficulty == "medium":
-        #     self.removed_cells = 40
-        # elif difficulty == "hard":
-        #     self.removed_cells = 50
-
         while self.removed_cells > 0:
             cell_row = random.randrange(0, 9)
             cell_col = random.randrange(0, 9)
@@ -264,7 +258,7 @@ Return: list[list] (a 2D Python list to represent the board)
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
-    board_sol = sudoku.get_board()
+    board_sol = copy.deepcopy(sudoku.get_board())
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board, board_sol

@@ -12,57 +12,62 @@ pygame.key.set_repeat(1000,0)
 screen = pygame.display.set_mode((405, 504))
 pygame.display.set_caption("Sudoku")
 
-# def drawLines():
-#         for i in range(0, 4):
-#             pygame.draw.line(screen, "black", (0, i * 135), (405, i * 135), 5)
-#             pygame.draw.line(screen, "black", (i * 135, 0), (i * 135, 405), 5)
-#             for i in range(0, 9):
-#                 pygame.draw.line(screen, "black", (0, i * 45), (405, i * 45), 2)
-#             for i in range(0, 9):
-#                 pygame.draw.line(screen, "black", (i * 45, 0), (i * 45, 405), 2)
-
 def opening_Screen():
-            background_image = pygame.image.load("background_Sudoku.jpg")
-            screen.blit(background_image, (0,0), (700, 100, 405, 504))
-            welcome = "Welcome to Sudoku"
-            intro = pygame.font.Font(None, 60)
-            welcome_surf = intro.render(welcome, True, "black")
-            welcome_rect = welcome_surf.get_rect(center=(202.5, 125))
-            screen.blit(welcome_surf, welcome_rect)
-            options = "Select Game Mode"
-            options_1 = pygame.font.Font(None, 40)
-            options_surf = options_1.render(options, True, "black")
-            options_rect = options_surf.get_rect(center=(202.5, 300))
-            screen.blit(options_surf, options_rect)
-            difficulty = pygame.font.Font(None, 25)
-            easy_text = "Easy"
-            medium_text = "Medium"
-            hard_text = "Hard"
-            pygame.draw.line(screen, "orange", (30, 352), (120, 352), 3)
-            pygame.draw.line(screen, "orange", (30, 352), (30, 402), 3)
-            pygame.draw.line(screen, "orange", (30, 402), (120, 402), 3)
-            pygame.draw.line(screen, "orange", (120, 352), (120, 402), 3)
-            easy_surf = difficulty.render(easy_text, True, "white")
-            end_rect = easy_surf.get_rect(center=(75, 377))
-            screen.blit(easy_surf, end_rect)
+    background_image = pygame.image.load("background_Sudoku.jpg")
+    screen.blit(background_image, (0, 0), (700, 100, 405, 504))
+    welcome = "Welcome to Sudoku"
+    intro = pygame.font.Font(None, 60)
+    welcome_surf = intro.render(welcome, True, "black")
+    welcome_rect = welcome_surf.get_rect(center=(202.5, 125))
+    screen.blit(welcome_surf, welcome_rect)
+    options = "Select Game Mode"
+    options_1 = pygame.font.Font(None, 40)
+    options_surf = options_1.render(options, True, "black")
+    options_rect = options_surf.get_rect(center=(202.5, 300))
+    screen.blit(options_surf, options_rect)
+    difficulty = pygame.font.Font(None, 25)
+    easy_text = "Easy"
+    medium_text = "Medium"
+    hard_text = "Hard"
+    pygame.draw.line(screen, "orange", (30, 352), (120, 352), 3)
+    pygame.draw.line(screen, "orange", (30, 352), (30, 402), 3)
+    pygame.draw.line(screen, "orange", (30, 402), (120, 402), 3)
+    pygame.draw.line(screen, "orange", (120, 352), (120, 402), 3)
+    easy_surf = difficulty.render(easy_text, True, "white")
+    end_rect = easy_surf.get_rect(center=(75, 377))
+    screen.blit(easy_surf, end_rect)
 
-            pygame.draw.line(screen, "orange", (155, 352), (245, 352), 3)
-            pygame.draw.line(screen, "orange", (155, 352), (155, 402), 3)
-            pygame.draw.line(screen, "orange", (155, 402), (245, 402), 3)
-            pygame.draw.line(screen, "orange", (245, 352), (245, 402), 3)
-            medium_surf = difficulty.render(medium_text, True, "white")
-            end_rect = medium_surf.get_rect(center=(200, 377))
-            screen.blit(medium_surf, end_rect)
+    pygame.draw.line(screen, "orange", (155, 352), (245, 352), 3)
+    pygame.draw.line(screen, "orange", (155, 352), (155, 402), 3)
+    pygame.draw.line(screen, "orange", (155, 402), (245, 402), 3)
+    pygame.draw.line(screen, "orange", (245, 352), (245, 402), 3)
+    medium_surf = difficulty.render(medium_text, True, "white")
+    end_rect = medium_surf.get_rect(center=(200, 377))
+    screen.blit(medium_surf, end_rect)
 
-            pygame.draw.line(screen, "orange", (280, 352), (370, 352), 3)
-            pygame.draw.line(screen, "orange", (280, 352), (280, 402), 3)
-            pygame.draw.line(screen, "orange", (280, 402), (370, 402), 3)
-            pygame.draw.line(screen, "orange", (370, 352), (370, 402), 3)
-            hard_surf = difficulty.render(hard_text, True, "white")
-            end_rect = hard_surf.get_rect(center=(325, 377))
-            screen.blit(hard_surf, end_rect)
+    pygame.draw.line(screen, "orange", (280, 352), (370, 352), 3)
+    pygame.draw.line(screen, "orange", (280, 352), (280, 402), 3)
+    pygame.draw.line(screen, "orange", (280, 402), (370, 402), 3)
+    pygame.draw.line(screen, "orange", (370, 352), (370, 402), 3)
+    hard_surf = difficulty.render(hard_text, True, "white")
+    end_rect = hard_surf.get_rect(center=(325, 377))
+    screen.blit(hard_surf, end_rect)
 
-def in_game():
+def difficulty_selection(click_x, click_y):
+    easy = (30, 352, 120, 402)
+    medium = (155, 352, 245, 402)
+    hard = (280, 352, 370, 402)
+
+    if easy[0] < click_x < easy[2] and easy[1] < click_y < easy[3]:
+        return "easy"
+
+    if medium[0] < click_x < medium[2] and medium[1] < click_y < medium[3]:
+        return "medium"
+
+    if hard[0] < click_x < hard[2] and hard[1] < click_y < hard[3]:
+        return "hard"
+
+def in_game_screen():
     button_font = pygame.font.Font(None, 25)
 
     pygame.draw.line(screen, "orange", (30, 454), (120, 454), 3)
@@ -91,53 +96,6 @@ def in_game():
     button3_surf = button_font.render(button3, True, "white")
     end_rect = button3_surf.get_rect(center=(325, 479))
     screen.blit(button3_surf, end_rect)
-
-    board_display = Board(405, 405, screen, difficulty)
-    row = 9
-    col = 9
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                (x, y) = event.pos
-                row = y // 45
-                col = x // 45
-                # add code here for reset, restart, and exit buttons
-                # if easy[0] < x < easy[2] and easy[1] < y < easy[3]:
-                #     return "easy"
-                # if medium[0] < x < medium[2] and medium[1] < y < medium[3]:
-                #     return "medium"
-                # if hard[0] < x < hard[2] and hard[1] < y < hard[3]:
-                #     return "hard"
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    row -= 1
-                if event.key == pygame.K_DOWN:
-                    row += 1
-                if event.key == pygame.K_RIGHT:
-                    col += 1
-                if event.key == pygame.K_LEFT:
-                    col -= 1
-        screen.fill("light blue")
-        board_display.draw()
-
-        # Code for select function
-
-        if row > 8:
-            row = 8
-        if col > 8:
-            col = 8
-        if row < 0:
-            row = 0
-        if col < 0:
-            col = 0
-
-        board_display.select(row, col)
-        pygame.display.flip()
 
 def victory_screen():
     button_font = pygame.font.Font(None, 25)
@@ -175,23 +133,69 @@ def loss_screen():
     end_rect = button3_surf.get_rect(center=(202.5, 300))
     screen.blit(button3_surf, end_rect)
 
-def difficulty_selection(click_x, click_y):
-    easy = (30, 352, 120, 402)
-    medium = (155, 352, 245, 402)
-    hard = (280, 352, 370, 402)
+def in_game():
+    board_display = Board(405, 405, screen, difficulty)
+    # add code here for displaying the board on the screen
+    row = 9
+    col = 9
 
-    if easy[0] < click_x < easy[2] and easy[1] < click_y < easy[3]:
-        return "easy"
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                (x, y) = event.pos
+                row = y // 45
+                col = x // 45
+                if 30 < x < 120 and 454 < y < 504:
+                    #code to reset board
+                    print("reset")
+                if 155 < x < 245 and 454 < y < 504:
+                    pygame.init()
+                    pygame.key.set_repeat(1000, 0)
+                    pygame.display.set_caption("Sudoku")
+                    opening_Screen()
+                    pygame.display.flip()
+                    return
+                if 280 < x < 370 and 454 < y < 504:
+                    print("Game was quit")
+                    pygame.quit()
+                    sys.exit()
 
-    if medium[0] < click_x < medium[2] and medium[1] < click_y < medium[3]:
-        return "medium"
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    row -= 1
+                if event.key == pygame.K_DOWN:
+                    row += 1
+                if event.key == pygame.K_RIGHT:
+                    col += 1
+                if event.key == pygame.K_LEFT:
+                    col -= 1
 
-    if hard[0] < click_x < hard[2] and hard[1] < click_y < hard[3]:
-        return "hard"
+        screen.fill("light blue")
+        board_display.draw()
+        in_game_screen()
+
+        # Code for select function
+
+        if row > 8:
+            row = 8
+        if col > 8:
+            col = 8
+        if row < 0:
+            row = 0
+        if col < 0:
+            col = 0
+
+        board_display.select(row, col)
+        pygame.display.flip()
+
+def check_solution(player_board, board_sol):
+    print("check_solution")
 
 opening_Screen()
 pygame.display.flip()
-
 
 while True:
     for event in pygame.event.get():
