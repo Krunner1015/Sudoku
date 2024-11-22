@@ -32,10 +32,13 @@ class Board:
         
 
     def click(self, row, col):
-    # 	If a tuple of (x,y) coordinates is within the displayed board, 
-    # this function returns a tuple of the (row, col) of the cell which was clicked. 
-    # Otherwise, this function returns None.
-        pass
+        if 0 <= row < self.height and 0 <= col < self.width:
+            row = row // 45
+            col = col // 45
+            pos = (row, col)
+            return pos
+        return None
+
 
     def clear(self):
     # 	Clears the value cell. 

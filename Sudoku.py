@@ -70,31 +70,31 @@ def difficulty_selection(click_x, click_y):
 def in_game_screen():
     button_font = pygame.font.Font(None, 25)
 
-    pygame.draw.line(screen, "orange", (30, 454), (120, 454), 3)
-    pygame.draw.line(screen, "orange", (30, 454), (30, 504), 3)
-    pygame.draw.line(screen, "orange", (30, 504), (120, 504), 3)
-    pygame.draw.line(screen, "orange", (120, 454), (120, 504), 3)
+    pygame.draw.line(screen, "orange", (30, 429), (120, 429), 3)
+    pygame.draw.line(screen, "orange", (30, 429), (30, 479), 3)
+    pygame.draw.line(screen, "orange", (30, 479), (120, 479), 3)
+    pygame.draw.line(screen, "orange", (120, 429), (120, 479), 3)
     button1 = "Reset"
     button1_surf = button_font.render(button1, True, "white")
-    end_rect = button1_surf.get_rect(center=(75, 479))
+    end_rect = button1_surf.get_rect(center=(75, 454))
     screen.blit(button1_surf, end_rect)
 
-    pygame.draw.line(screen, "orange", (155, 454), (245, 454), 3)
-    pygame.draw.line(screen, "orange", (155, 454), (155, 504), 3)
-    pygame.draw.line(screen, "orange", (155, 504), (245, 504), 3)
-    pygame.draw.line(screen, "orange", (245, 454), (245, 504), 3)
+    pygame.draw.line(screen, "orange", (155, 429), (245, 429), 3)
+    pygame.draw.line(screen, "orange", (155, 429), (155, 479), 3)
+    pygame.draw.line(screen, "orange", (155, 479), (245, 479), 3)
+    pygame.draw.line(screen, "orange", (245, 429), (245, 479), 3)
     button2 = "Restart"
     button2_surf = button_font.render(button2, True, "white")
-    end_rect = button2_surf.get_rect(center=(200, 479))
+    end_rect = button2_surf.get_rect(center=(200, 454))
     screen.blit(button2_surf, end_rect)
 
-    pygame.draw.line(screen, "orange", (280, 454), (370, 454), 3)
-    pygame.draw.line(screen, "orange", (280, 454), (280, 504), 3)
-    pygame.draw.line(screen, "orange", (280, 504), (370, 504), 3)
-    pygame.draw.line(screen, "orange", (370, 454), (370, 504), 3)
+    pygame.draw.line(screen, "orange", (280, 429), (370, 429), 3)
+    pygame.draw.line(screen, "orange", (280, 429), (280, 479), 3)
+    pygame.draw.line(screen, "orange", (280, 479), (370, 479), 3)
+    pygame.draw.line(screen, "orange", (370, 429), (370, 479), 3)
     button3 = "Exit"
     button3_surf = button_font.render(button3, True, "white")
-    end_rect = button3_surf.get_rect(center=(325, 479))
+    end_rect = button3_surf.get_rect(center=(325, 454))
     screen.blit(button3_surf, end_rect)
 
 def victory_screen():
