@@ -60,13 +60,13 @@ def difficulty_selection(click_x, click_y):
     hard = (280, 352, 370, 402)
 
     if easy[0] < click_x < easy[2] and easy[1] < click_y < easy[3]:
-        return "easy"
+        return "Easy"
 
     if medium[0] < click_x < medium[2] and medium[1] < click_y < medium[3]:
-        return "medium"
+        return "Medium"
 
     if hard[0] < click_x < hard[2] and hard[1] < click_y < hard[3]:
-        return "hard"
+        return "Hard"
 
 def in_game_buttons():
     button_font = pygame.font.Font(None, 25)
@@ -147,6 +147,7 @@ def draw_board():
 def in_game():
     global board_display
     board_display= Board(405, 405, screen, difficulty)
+    pygame.display.set_caption(f"Sudoku - {difficulty}")
     row = 9
     col = 9
 
@@ -160,7 +161,8 @@ def in_game():
                 row = y // 45
                 col = x // 45
                 if 30 < x < 120 and 429 < y < 479:
-                    #code to reset board
+                    board_display = Board(405, 405, screen, difficulty)
+                    pygame.display.set_caption(f"Sudoku - {difficulty}")
                     print("reset")
                 if 155 < x < 245 and 429 < y < 479:
                     pygame.init()
@@ -183,23 +185,23 @@ def in_game():
                     col += 1
                 if event.key == pygame.K_LEFT:
                     col -= 1
-                if event.key == pygame.K_1:
+                if event.key == pygame.K_1 or event.key == pygame.K_KP1:
                     board[board_display.select_x][board_display.select_y] = 1
-                if event.key == pygame.K_2:
+                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
                     board[board_display.select_x][board_display.select_y] = 2
-                if event.key == pygame.K_3:
+                if event.key == pygame.K_3 or event.key == pygame.K_KP3:
                     board[board_display.select_x][board_display.select_y] = 3
-                if event.key == pygame.K_4:
+                if event.key == pygame.K_4 or event.key == pygame.K_KP4:
                     board[board_display.select_x][board_display.select_y] = 4
-                if event.key == pygame.K_5:
+                if event.key == pygame.K_5 or event.key == pygame.K_KP5:
                     board[board_display.select_x][board_display.select_y] = 5
-                if event.key == pygame.K_6:
+                if event.key == pygame.K_6 or event.key == pygame.K_KP6:
                     board[board_display.select_x][board_display.select_y] = 6
-                if event.key == pygame.K_7:
+                if event.key == pygame.K_7 or event.key == pygame.K_KP7:
                     board[board_display.select_x][board_display.select_y] = 7
-                if event.key == pygame.K_8:
+                if event.key == pygame.K_8 or event.key == pygame.K_KP8:
                     board[board_display.select_x][board_display.select_y] = 8
-                if event.key == pygame.K_9:
+                if event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     board[board_display.select_x][board_display.select_y] = 9
 
         # Code for select function
@@ -234,14 +236,14 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
             x, y = pygame.mouse.get_pos()
             difficulty = difficulty_selection(x, y)
-            if difficulty == "easy":
+            if difficulty == "Easy":
                 board, board_sol = generate_sudoku(9, 30)
                 #print(board)
                 #print(difficulty)
                 in_game()
-            elif difficulty == "medium":
+            elif difficulty == "Medium":
                 board, board_sol = generate_sudoku(9, 40)
                 in_game()
-            elif difficulty == "hard":
+            elif difficulty == "Hard":
                 board, board_sol = generate_sudoku(9, 50)
                 in_game()
