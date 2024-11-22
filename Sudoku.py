@@ -26,7 +26,7 @@ def opening_Screen():
     options_surf = options_1.render(options, True, "black")
     options_rect = options_surf.get_rect(center=(202.5, 300))
     screen.blit(options_surf, options_rect)
-    difficulty = pygame.font.Font(None, 25)
+    difficulty_font = pygame.font.Font(None, 25)
     easy_text = "Easy"
     medium_text = "Medium"
     hard_text = "Hard"
@@ -34,7 +34,7 @@ def opening_Screen():
     pygame.draw.line(screen, "orange", (30, 352), (30, 402), 3)
     pygame.draw.line(screen, "orange", (30, 402), (120, 402), 3)
     pygame.draw.line(screen, "orange", (120, 352), (120, 402), 3)
-    easy_surf = difficulty.render(easy_text, True, "white")
+    easy_surf = difficulty_font.render(easy_text, True, "white")
     end_rect = easy_surf.get_rect(center=(75, 377))
     screen.blit(easy_surf, end_rect)
 
@@ -42,7 +42,7 @@ def opening_Screen():
     pygame.draw.line(screen, "orange", (155, 352), (155, 402), 3)
     pygame.draw.line(screen, "orange", (155, 402), (245, 402), 3)
     pygame.draw.line(screen, "orange", (245, 352), (245, 402), 3)
-    medium_surf = difficulty.render(medium_text, True, "white")
+    medium_surf = difficulty_font.render(medium_text, True, "white")
     end_rect = medium_surf.get_rect(center=(200, 377))
     screen.blit(medium_surf, end_rect)
 
@@ -50,7 +50,7 @@ def opening_Screen():
     pygame.draw.line(screen, "orange", (280, 352), (280, 402), 3)
     pygame.draw.line(screen, "orange", (280, 402), (370, 402), 3)
     pygame.draw.line(screen, "orange", (370, 352), (370, 402), 3)
-    hard_surf = difficulty.render(hard_text, True, "white")
+    hard_surf = difficulty_font.render(hard_text, True, "white")
     end_rect = hard_surf.get_rect(center=(325, 377))
     screen.blit(hard_surf, end_rect)
 
@@ -138,10 +138,10 @@ def draw_board():
     for row in range(9):
         for col in range(9):
             if board[row][col] == 0:
-                return
+                continue
             else:
                 cell_surf = font.render(str(board[row][col]), True, (0, 0, 0))
-                cell_rect = cell_surf.get_rect(topleft=(col * 45 + 45 / 2, row * 45 + 45 / 2))
+                cell_rect = cell_surf.get_rect(topleft=(col * 45 + 42 / 2, row * 45 - 1 / 2))
                 screen.blit(cell_surf, cell_rect)
 
 def in_game():
@@ -212,12 +212,13 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
         if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
             x, y = pygame.mouse.get_pos()
             difficulty = difficulty_selection(x, y)
             if difficulty == "easy":
                 board, board_sol = generate_sudoku(9, 30)
+                print(board)
+                print(difficulty)
                 in_game()
             elif difficulty == "medium":
                 board, board_sol = generate_sudoku(9, 40)
