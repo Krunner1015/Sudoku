@@ -1,4 +1,5 @@
 import pygame
+from sudoku_generator import SudokuGenerator
 import sys
 
 class Board:
@@ -7,6 +8,8 @@ class Board:
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
+        self.select_x = 0
+        self.select_y = 0
 
 
     def draw(self):
@@ -38,6 +41,8 @@ class Board:
         pygame.draw.rect(self.screen, "red", pygame.Rect(col*self.width/9, row*self.height/9, 47,2))
         pygame.draw.rect(self.screen, "red", pygame.Rect(self.width/9+col*self.width/9, row*self.height/9, 2, 47))
         pygame.draw.rect(self.screen, "red", pygame.Rect(col*self.width/9, self.height/9+row*self.height/9, 47,2))
+        self.select_x = row
+        self.select_y = col
 
 
         
@@ -73,13 +78,14 @@ class Board:
         pass
 
     def is_full(self):
-        # Returns a Boolean value indicating whether the board is full or not.
-        pass
+        for value in self.board:
+            if value == 0:
+                return False
+            else:
+                return True
 
     def update_board(self):
-        # Updates the underlying 2D board with the values in all cells.
         pass
-
     def find_empty(self):
         # Finds an empty cell and returns its row and col as a tuple (x,y).
         pass
