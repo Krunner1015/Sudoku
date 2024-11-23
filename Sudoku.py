@@ -146,11 +146,14 @@ def draw_board(board):
 
 def in_game():
     global board_display
-    board_display= Board(405, 405, screen, difficulty)
+    board_display = Board(405, 405, screen, difficulty)
     pygame.display.set_caption(f"Sudoku - {difficulty}")
     board = [row[:] for row in original_board]
     row = 9
     col = 9
+    sketched_number = None
+    small_font = pygame.font.SysFont("Arial", 20)
+    sketched_board = [[None for _ in range(9)] for _ in range(9)]
 
     while True:
         for event in pygame.event.get():
@@ -191,40 +194,34 @@ def in_game():
                     col += 1
                 if event.key == pygame.K_LEFT:
                     col -= 1
-                if event.key == pygame.K_1 or event.key == pygame.K_KP1:
-                    board[board_display.select_x][board_display.select_y] = 1
-                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
-                    board[board_display.select_x][board_display.select_y] = 2
-                if event.key == pygame.K_3 or event.key == pygame.K_KP3:
-                    board[board_display.select_x][board_display.select_y] = 3
-                if event.key == pygame.K_4 or event.key == pygame.K_KP4:
-                    board[board_display.select_x][board_display.select_y] = 4
-                if event.key == pygame.K_5 or event.key == pygame.K_KP5:
-                    board[board_display.select_x][board_display.select_y] = 5
-                if event.key == pygame.K_6 or event.key == pygame.K_KP6:
-                    board[board_display.select_x][board_display.select_y] = 6
-                if event.key == pygame.K_7 or event.key == pygame.K_KP7:
-                    board[board_display.select_x][board_display.select_y] = 7
-                if event.key == pygame.K_8 or event.key == pygame.K_KP8:
-                    board[board_display.select_x][board_display.select_y] = 8
-                if event.key == pygame.K_9 or event.key == pygame.K_KP9:
-                    board[board_display.select_x][board_display.select_y] = 9
+                if event.key in [pygame.K_1, pygame.K_KP1, pygame.K_2, pygame.K_KP2,
+                                 pygame.K_3, pygame.K_KP3, pygame.K_4, pygame.K_KP4,
+                                 pygame.K_5, pygame.K_KP5, pygame.K_6, pygame.K_KP6,
+                                 pygame.K_7, pygame.K_KP7, pygame.K_8, pygame.K_KP8,
+                                 pygame.K_9, pygame.K_KP9]:
+                    sketched_number = event.key - pygame.K_1 + 1
+                    sketched_board[row][col] = sketched_number
+                if event.key == pygame.K_RETURN and sketched_board[row][col] is not None:
+                    board[row][col] = sketched_board[row][col]
+                    sketched_board[row][col] = None
 
         # Code for select function
 
-        if row > 8:
-            row = 8
-        if col > 8:
-            col = 8
-        if row < 0:
-            row = 0
-        if col < 0:
-            col = 0
+        row = max(0, min(8, row))
+        col = max(0, min(8, col))
 
         screen.fill("light blue")
         board_display.draw()
         in_game_buttons()
         draw_board(board)
+
+        for r in range(9):
+            for c in range(9):
+                if sketched_board[r][c] is not None:
+                    sketched_number_surf = small_font.render(str(sketched_board[r][c]), True, (80, 80, 80))
+                    sketched_number_rect = sketched_number_surf.get_rect(topleft=(c * 45 + 2, r * 45 + 2))
+                    screen.blit(sketched_number_surf, sketched_number_rect)
+
         board_display.select(row, col)
         pygame.display.flip()
 
