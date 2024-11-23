@@ -134,7 +134,7 @@ def loss_screen():
     end_rect = button3_surf.get_rect(center=(202.5, 300))
     screen.blit(button3_surf, end_rect)
 
-def draw_board():
+def draw_board(board):
     for row in range(9):
         for col in range(9):
             if board[row][col] == 0:
@@ -148,6 +148,7 @@ def in_game():
     global board_display
     board_display= Board(405, 405, screen, difficulty)
     pygame.display.set_caption(f"Sudoku - {difficulty}")
+    board = [row[:] for row in original_board]
     row = 9
     col = 9
 
@@ -161,9 +162,14 @@ def in_game():
                 row = y // 45
                 col = x // 45
                 if 30 < x < 120 and 429 < y < 479:
-                    board_display = Board(405, 405, screen, difficulty)
-                    pygame.display.set_caption(f"Sudoku - {difficulty}")
-                    print("reset")
+                    board = [row[:] for row in original_board]
+                    print("board reset")
+                    screen.fill("light blue")
+                    board_display.draw()
+                    in_game_buttons()
+                    draw_board(board)
+                    pygame.display.flip()
+                    continue
                 if 155 < x < 245 and 429 < y < 479:
                     pygame.init()
                     pygame.key.set_repeat(1000, 0)
@@ -218,7 +224,7 @@ def in_game():
         screen.fill("light blue")
         board_display.draw()
         in_game_buttons()
-        draw_board()
+        draw_board(board)
         board_display.select(row, col)
         pygame.display.flip()
 
@@ -238,12 +244,13 @@ while True:
             difficulty = difficulty_selection(x, y)
             if difficulty == "Easy":
                 board, board_sol = generate_sudoku(9, 30)
-                #print(board)
-                #print(difficulty)
+                original_board = board
                 in_game()
             elif difficulty == "Medium":
                 board, board_sol = generate_sudoku(9, 40)
+                original_board = board
                 in_game()
             elif difficulty == "Hard":
                 board, board_sol = generate_sudoku(9, 50)
+                original_board = board
                 in_game()
